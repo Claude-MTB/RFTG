@@ -123,11 +123,10 @@ public class InventoryController {
         return jsonResults;
     }
    
-  @GetMapping("/available")
-    public @ResponseBody Integer getAvailableFilmIds() {
-        Integer availableFilmIds = inventoryDisponibleRepository.findFreeInventoryIds();
-        return availableFilmIds;
-    }
+    @GetMapping("/available/getById")
+    public @ResponseBody Integer getAvailableFilmId(@RequestParam Integer id) {
+          return inventoryDisponibleRepository.findFreeInventoryId(id);
+      }
 
     /**
      * Méthode utilitaire pour convertir dynamiquement un objet en Integer.
