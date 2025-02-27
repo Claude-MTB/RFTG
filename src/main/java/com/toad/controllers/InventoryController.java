@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.toad.entities.Inventory;
+import com.toad.repositories.InventoryDisponibleRepository;
 import com.toad.repositories.InventoryRepository;
 
 @Controller
@@ -24,6 +25,9 @@ import com.toad.repositories.InventoryRepository;
 public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;
+    @Autowired
+    private InventoryDisponibleRepository inventoryDisponibleRepository;
+
     @PostMapping(path = "/add")
     public @ResponseBody String addNewInventory(
             @RequestParam Integer film_id,
@@ -119,6 +123,12 @@ public class InventoryController {
         return jsonResults;
     }
    
+  @GetMapping("/available")
+    public @ResponseBody Integer getAvailableFilmIds() {
+        Integer availableFilmIds = inventoryDisponibleRepository.findFreeInventoryIds();
+        return availableFilmIds;
+    }
+
     /**
      * Méthode utilitaire pour convertir dynamiquement un objet en Integer.
      */
