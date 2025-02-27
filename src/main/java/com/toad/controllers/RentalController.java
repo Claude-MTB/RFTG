@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.toad.entities.Rental;
 import com.toad.repositories.RentalRepository;
 
-@Controller // This means that this class is a Controller
-@RequestMapping(path = "/toad/rental") // This means URL's start with /film (after Application path)
+@Controller
+@RequestMapping(path = "/toad/rental")
 public class RentalController {
     @Autowired
-    private RentalRepository RentalRepository; // Assuming you have a RentalRepository for Rental entity
+    private RentalRepository RentalRepository; 
 
-    @PutMapping(path = "/update/{rental_id}") // Map ONLY PUT Requests for updating a film
+    @PutMapping(path = "/update/{rental_id}")
     public @ResponseBody String updateRental(
             @PathVariable Integer rental_id,
             @RequestParam String rental_date,
@@ -61,6 +60,8 @@ public class RentalController {
             @RequestParam String last_update) {
     
         Rental newRental = new Rental();
+
+        newRental.setRentalId(Integer.valueOf(0));
         newRental.setRentalDate(rental_date);
         newRental.setInventoryId(inventory_id);
         newRental.setCustomerId(customer_id);
