@@ -47,8 +47,8 @@ public class Film {
     @Column(name = "last_update")
     private java.sql.Timestamp lastUpdate;
 
-    @Column(name = "id_director")
-    private Long idDirector; // BIGINT
+    // @Column(name = "id_director")
+    // private Long idDirector; // BIGINT
 
     // Getters and Setters
     public Integer getFilmId() {
@@ -155,11 +155,11 @@ public class Film {
         this.lastUpdate = lastUpdate;
     }
 
-    public Long getIdDirector() {
-        return idDirector;
-    }
+    // public Long getIdDirector() {
+    //     return idDirector;
+    // }
 
-    public void setIdDirector(Long idDirector) {
-        this.idDirector = idDirector;
-    }
+    // public void setIdDirector(Long idDirector) {
+    //     this.idDirector = idDirector;
+    // }
 }

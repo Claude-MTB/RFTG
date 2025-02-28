@@ -32,8 +32,9 @@ public class FilmController {
             @RequestParam Integer length,
             @RequestParam Double replacementCost,
             @RequestParam String rating,
-            @RequestParam java.sql.Timestamp lastUpdate,
-            @RequestParam Long idDirector) {
+            @RequestParam java.sql.Timestamp lastUpdate
+            // @RequestParam Long idDirector
+        ) {
         
         Film film = new Film();
         film.setTitle(title);
@@ -47,7 +48,7 @@ public class FilmController {
         film.setReplacementCost(replacementCost);
         film.setRating(rating);
         film.setLastUpdate(lastUpdate);
-        film.setIdDirector(idDirector);
+        // film.setIdDirector(idDirector);
 
         System.out.println(film.getTitle());
 
@@ -79,8 +80,9 @@ public class FilmController {
             @RequestParam Integer length,
             @RequestParam Double replacementCost,
             @RequestParam String rating,
-            @RequestParam java.sql.Timestamp lastUpdate,
-            @RequestParam Long idDirector) {
+            @RequestParam java.sql.Timestamp lastUpdate
+            // @RequestParam Long idDirector
+        ) {
         
         String status = null;
         if (filmRepository.existsById(id)) {
@@ -96,7 +98,7 @@ public class FilmController {
             film.setReplacementCost(replacementCost);
             film.setRating(rating);
             film.setLastUpdate(lastUpdate);
-            film.setIdDirector(idDirector);
+            // film.setIdDirector(idDirector);
     
             filmRepository.save(film);
             status = "Film Mis à jour";
