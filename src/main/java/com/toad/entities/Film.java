@@ -1,13 +1,16 @@
 package com.toad.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Film {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
     private Integer filmId; // BIGINT
 
