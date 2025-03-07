@@ -35,7 +35,7 @@ PRIMARY KEY (translation_id),
 KEY idx_language (language_id), 
 KEY idx_film (film_id), 
 CONSTRAINT fk_translation_language_id FOREIGN KEY (language_id) REFERENCES language (language_id) ON DELETE RESTRICT ON UPDATE CASCADE, 
-CONSTRAINT fk_translation_film_id FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE RESTRICT ON UPDATE CASCADE 
+CONSTRAINT fk_translation_film_id FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 
 
 CREATE TABLE film_language_subtitle ( 
@@ -46,7 +46,7 @@ PRIMARY KEY (subtitle_id),
 KEY idx_language (language_id), 
 KEY idx_film (film_id), 
 CONSTRAINT fk__subtitle_language_id FOREIGN KEY (language_id) REFERENCES language (language_id) ON DELETE RESTRICT ON UPDATE CASCADE, 
-CONSTRAINT fk_subtitle_film_id FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE RESTRICT ON UPDATE CASCADE 
+CONSTRAINT fk_subtitle_film_id FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE CASCADE ON UPDATE CASCADE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 
 
 
