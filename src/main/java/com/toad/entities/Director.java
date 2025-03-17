@@ -8,14 +8,14 @@ import jakarta.persistence.Id;
 @Entity // This tells Hibernate to make a table out of this class
 public class Director {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer director_id; // BIGINT
  
     private String nom;
  
     private String prenom;
  
-    private String date_naissance; // Year is typically handled as Integer
+    private java.sql.Timestamp date_naissance; // Year is typically handled as Integer
  
     private String nationnalite; // TINYINT
  
@@ -44,11 +44,11 @@ public class Director {
         this.prenom = prenom;
     }
  
-    public String  getdate_naissance() {
+    public java.sql.Timestamp getdate_naissance() {
         return date_naissance;
     }
  
-    public void setdate_naissance(String  date_naissance) {
+    public void setdate_naissance(java.sql.Timestamp date_naissance) {
         this.date_naissance = date_naissance;
     }
  

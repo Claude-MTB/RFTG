@@ -70,8 +70,8 @@ CREATE TABLE `film_director` (
   PRIMARY KEY (`film_id`,`director_id`),
   KEY `idx_film_director_director` (`director_id`),
   KEY `idx_film_director_film` (`film_id`),
-  CONSTRAINT `fk_film_director_director` FOREIGN KEY (`director_id`) REFERENCES `director` (`director_id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_film_director_film` FOREIGN KEY (`film_id`) REFERENCES `film` (`film_id`) ON UPDATE CASCADE
+  CONSTRAINT `fk_film_director_director` FOREIGN KEY (`director_id`) REFERENCES `director` (`director_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `fk_film_director_film` FOREIGN KEY (`film_id`) REFERENCES `film` (`film_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

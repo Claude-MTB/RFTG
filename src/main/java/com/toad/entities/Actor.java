@@ -8,11 +8,11 @@ import jakarta.persistence.Id;
 @Entity
 public class Actor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer actor_id;
     private String first_name;
     private String last_name;
-    private String last_update;
+    private java.sql.Timestamp last_update;
 
     // Getters and Setters
     public Integer getActor_id() {
@@ -39,11 +39,11 @@ public class Actor {
         this.last_name = last_name;
     }
 
-    public String getLast_update() {
+    public java.sql.Timestamp getLast_update() {
         return last_update;
     }
 
-    public void setLast_update(String last_update) {
+    public void setLast_update(java.sql.Timestamp last_update) {
         this.last_update = last_update;
     }
 }

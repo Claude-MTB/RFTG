@@ -44,12 +44,12 @@ public class ActorController {
         return ActorRepository.findById(id).orElse(null);
     }
 
-    @PutMapping(path = "/update/{actor_id}")
+    @PutMapping(path = "/update/{id}")
     public @ResponseBody String updateActor(
             @PathVariable Integer id,
             @RequestParam String first_name,
             @RequestParam String last_name,
-            @RequestParam String last_update) {
+            @RequestParam java.sql.Timestamp last_update) {
 
         Actor actor = ActorRepository.findById(id).orElse(null);
         if (actor == null) {

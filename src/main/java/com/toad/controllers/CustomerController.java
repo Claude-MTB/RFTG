@@ -85,7 +85,6 @@ public class CustomerController {
             customerRepository.save(customer);
             customer.setPassword(password);
             customer.setAge(age);
-            customer.setCreateUpdate(createUpdate);
             Texte = "Mise à jour du Client";
         }
         return Texte;
@@ -96,9 +95,51 @@ public class CustomerController {
     public @ResponseBody String deleteCustomer(@PathVariable Integer id) {
         customerRepository.deleteById(id);
         return "Customer delete";
-
     }
 
+    @GetMapping(path = "/getById")
+    public @ResponseBody Customer getCustomerById(@RequestParam Integer id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer != null) {
+        Customer filteredCustomer = new Customer();
+        filteredCustomer.setCustomerId(customer.getCustomerId());
+        filteredCustomer.setStoreId(customer.getStoreId());
+        filteredCustomer.setFirstName(customer.getFirstName());
+        filteredCustomer.setLastName(customer.getLastName());
+        filteredCustomer.setEmail(customer.getEmail());
+        filteredCustomer.setAddressId(customer.getAddressId());
+        filteredCustomer.setActive(customer.getActive());
+        filteredCustomer.setCreateDate(customer.getCreateDate());
+        filteredCustomer.setLastUpdate(customer.getLastUpdate());
+        filteredCustomer.setPassword(customer.getPassword());
+        filteredCustomer.setAge(customer.getAge());
+
+        return filteredCustomer;
+        }
+        return null;
+    }
+
+    @GetMapping(path = "/getByEmail")
+    public @ResponseBody Customer getCustomerByEmail(@RequestParam String email) {
+        Customer customer = customerRepository.findByEmail(email).orElse(null);
+        if (customer != null) {
+        Customer filteredCustomer = new Customer();
+        filteredCustomer.setCustomerId(customer.getCustomerId());
+        filteredCustomer.setStoreId(customer.getStoreId());
+        filteredCustomer.setFirstName(customer.getFirstName());
+        filteredCustomer.setLastName(customer.getLastName());
+        filteredCustomer.setEmail(customer.getEmail());
+        filteredCustomer.setAddressId(customer.getAddressId());
+        filteredCustomer.setActive(customer.getActive());
+        filteredCustomer.setCreateDate(customer.getCreateDate());
+        filteredCustomer.setLastUpdate(customer.getLastUpdate());
+        filteredCustomer.setPassword(customer.getPassword());
+        filteredCustomer.setAge(customer.getAge());
+
+        return filteredCustomer;
+        }
+        return null;
+    }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Customer> getAllCustomer() {
