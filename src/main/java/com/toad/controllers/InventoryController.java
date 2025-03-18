@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.toad.entities.Inventory;
 import com.toad.repositories.InventoryDisponibleRepository;
 import com.toad.repositories.InventoryRepository;
@@ -142,5 +142,21 @@ public class InventoryController {
             throw new IllegalArgumentException("Type inattendu : " + value.getClass().getName());
         }
     }
+
+    @GetMapping("/stock/byFilm")
+public @ResponseBody List<Map<String, Object>> getStockByFilm() {
+    List<Object[]> stockResults = inventoryRepository.findStockDisponibleParFilm();
+    List<Map<String, Object>> jsonResults = new ArrayList<>();
+
+    for (Object[] row : stockResults) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("title", row[0]);
+        result.put("stock_disponible", row[1]);
+        jsonResults.add(result);
+    }
+
+    return jsonResults;
+}
+
     
 }
