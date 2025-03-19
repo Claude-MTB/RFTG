@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.toad.entities.Rental;
 import com.toad.repositories.RentalRepository;
 
@@ -65,7 +66,7 @@ public class RentalController {
         newRental.setRentalDate(rental_date);
         newRental.setInventoryId(inventory_id);
         newRental.setCustomerId(customer_id);
-        newRental.setReturnDate(return_date);
+        newRental.setReturnDate(null);
         newRental.setStaffId(staff_id);
         newRental.setLastUpdate(last_update);
     

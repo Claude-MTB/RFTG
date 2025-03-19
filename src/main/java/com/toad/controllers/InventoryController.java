@@ -138,25 +138,32 @@ public class InventoryController {
             return ((Short) value).intValue();
         } else if (value instanceof Integer) {
             return (Integer) value;
+        } else if (value instanceof Long) {
+            return ((Long) value).intValue();
         } else {
             throw new IllegalArgumentException("Type inattendu : " + value.getClass().getName());
         }
     }
 
-    @GetMapping("/stock/byFilm")
-public @ResponseBody List<Map<String, Object>> getStockByFilm() {
-    List<Object[]> stockResults = inventoryRepository.findStockDisponibleParFilm();
-    List<Map<String, Object>> jsonResults = new ArrayList<>();
+    @GetMapping(path = "/stockFilm")
+    public @ResponseBody List<Map<String, Object>> getInventoryStockInfo() {
+        // Appel de la méthode du repository pour exécuter la requête
+        List<Object[]> groupedResults = inventoryRepository.findInventoryStockInfo();
+        
+        // Création d'une liste pour stocker les résultats au format JSON
+        List<Map<String, Object>> jsonResults = new ArrayList<>();
+        
+        for (Object[] row : groupedResults) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("title", row[0]); // title du film
+            result.put("totalStock", convertToInteger(row[1])); // total_stock
+            result.put("totalLoues", convertToInteger(row[2])); // total_loues
+            result.put("filmsDisponibles", convertToInteger(row[3])); // films_disponibles
 
-    for (Object[] row : stockResults) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("title", row[0]);
-        result.put("stock_disponible", row[1]);
-        jsonResults.add(result);
+            jsonResults.add(result);
+        }
+
+        return jsonResults;
     }
-
-    return jsonResults;
-}
-
     
 }
