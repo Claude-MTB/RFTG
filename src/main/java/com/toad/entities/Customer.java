@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity // This tells Hibernate to make a table out of this class
 public class Customer {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column (name="customer_id")
     private Integer customerId;
     @Column (name="store_id")
@@ -23,15 +23,15 @@ public class Customer {
     @Column (name="address_id")
     private Integer addressId;
     @Column (name="active")
-    private int active;
+    private Integer active;
     @Column (name="create_date")
     private java.sql.Timestamp createDate;
     @Column (name="last_update")
     private java.sql.Timestamp lastUpdate;
     @Column (name="password")
-    private int password;
+    private Integer password;
     @Column (name="age")
-    private int age;
+    private Integer age;
   
     public void setCustomerId(Integer customerId) {
       this.customerId = customerId;
@@ -74,10 +74,10 @@ public class Customer {
     public Integer getAddressId() {
       return addressId;
     }
-    public int getActive() {
+    public Integer getActive() {
       return active;
     }
-    public void setActive(int active) {
+    public void setActive(Integer active) {
       this.active = active;
     }
     public java.sql.Timestamp getCreateDate() {
@@ -92,16 +92,16 @@ public class Customer {
     public void setLastUpdate(java.sql.Timestamp lastUpdate) {
       this.lastUpdate = lastUpdate;
     }
-    public int getPassword() {
+    public Integer getPassword() {
       return password;
     }
-    public void setPassword(int password) {
+    public void setPassword(Integer password) {
       this.password = password;
     }
-    public int getAge() {
-      return age;
+    public Integer getAge() {
+      return age != null ? age : 0;
     }
-    public void setAge(int age) {
+    public void setAge(Integer age) {
       this.age = age;
     }
     }

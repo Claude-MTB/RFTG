@@ -159,6 +159,8 @@ public class InventoryController {
             result.put("totalStock", convertToInteger(row[1])); // total_stock
             result.put("totalLoues", convertToInteger(row[2])); // total_loues
             result.put("filmsDisponibles", convertToInteger(row[3])); // films_disponibles
+            result.put("filmId", convertToInteger(row[4]));
+
 
             jsonResults.add(result);
         }

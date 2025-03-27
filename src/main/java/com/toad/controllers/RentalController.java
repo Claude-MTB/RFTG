@@ -1,5 +1,10 @@
 package com.toad.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -106,5 +111,49 @@ public class RentalController {
             return filteredRental;
         }
         return null;
+    }
+
+    @GetMapping(path = "/getInformations")
+    public @ResponseBody List<Map<String, Object>> getRentalInformations() {
+        List<Object[]> stockResults = RentalRepository.sortRentalInformations();
+        List<Map<String, Object>> jsonResults = new ArrayList<>();
+
+        for (Object[] row : stockResults) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("customer_firstname", row[0]);
+            result.put("customer_lastname", row[1]);
+            result.put("title", row[2]);
+            result.put("staff_firstname", row[3]);
+            result.put("staff_lastname", row[4]);
+            result.put("rental_date", row[5]);
+            result.put("return_date", row[6]);
+            result.put("last_update", row[7]);
+            result.put("rental_id", row[8]);
+            jsonResults.add(result);
+        }
+
+        return jsonResults;
+    }
+
+    @GetMapping(path = "/getInformations/{rentalId}")
+    public @ResponseBody List<Map<String, Object>> getRentalInformations(@PathVariable Integer rentalId) {
+        List<Object[]> stockResults = RentalRepository.findRentalInformationsById(rentalId);
+        List<Map<String, Object>> jsonResults = new ArrayList<>();
+
+        for (Object[] row : stockResults) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("customer_firstname", row[0]);
+            result.put("customer_lastname", row[1]);
+            result.put("title", row[2]);
+            result.put("staff_firstname", row[3]);
+            result.put("staff_lastname", row[4]);
+            result.put("rental_date", row[5]);
+            result.put("return_date", row[6]);
+            result.put("last_update", row[7]);
+            result.put("rental_id", row[8]);
+            jsonResults.add(result);
+        }
+
+        return jsonResults;
     }
 }

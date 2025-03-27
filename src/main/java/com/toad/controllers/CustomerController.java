@@ -23,27 +23,28 @@ public class CustomerController {
 
     @PostMapping(path="/add")
     public @ResponseBody String addNewCustomer (
-    @PathVariable Integer customer_id,
     @RequestParam Integer store_id,
     @RequestParam String first_name,
     @RequestParam String last_name,
     @RequestParam String email,
     @RequestParam Integer address_id,
-    @RequestParam int active,
+    @RequestParam Integer active,
     @RequestParam java.sql.Timestamp create_update,
     @RequestParam java.sql.Timestamp last_update,
-    @RequestParam int password,
-    @RequestParam int age) {
+    @RequestParam Integer password,
+    @RequestParam Integer age) {
     // CREATION D'UN CLIENT
     Customer newCustomer = new Customer();
-    newCustomer.setCustomerId(customer_id);
     newCustomer.setStoreId(store_id);
     newCustomer.setFirstName(first_name);
     newCustomer.setLastName(last_name);
     newCustomer.setEmail(email);
+    newCustomer.setActive(active);
     newCustomer.setAddressId(address_id);
     newCustomer.setCreateDate(create_update);
-    newCustomer.setLastUpdate(last_update);            
+    newCustomer.setLastUpdate(last_update);     
+    newCustomer.setPassword(password);
+    newCustomer.setAge(age);       
     customerRepository.save(newCustomer);
 
     return "Client Créer";
