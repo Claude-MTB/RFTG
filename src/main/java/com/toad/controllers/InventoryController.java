@@ -64,6 +64,7 @@ public class InventoryController {
             filteredInventory.setFilmId(inventory.getFilmId());
             filteredInventory.setStoreId(inventory.getStoreId());
             filteredInventory.setLastUpdate(inventory.getLastUpdate());
+            filteredInventory.setExiste(inventory.getExiste());
             return filteredInventory;
         }
         return null;
@@ -73,7 +74,9 @@ public class InventoryController {
             @PathVariable Integer id,
             @RequestParam Integer film_id,
             @RequestParam Integer store_id,
-            @RequestParam java.sql.Timestamp last_update) {
+            @RequestParam java.sql.Timestamp last_update,
+            @RequestParam Boolean existe
+            ) {
         
         Inventory inventory = inventoryRepository.findById(id).orElse(null);
         String message;
@@ -84,6 +87,8 @@ public class InventoryController {
             inventory.setFilmId(film_id);
             inventory.setStoreId(store_id);
             inventory.setLastUpdate(last_update);
+            inventory.setExiste(existe);  
+            
 
             inventoryRepository.save(inventory);
             message = "Inventaire Mis à Jour";
@@ -96,13 +101,36 @@ public class InventoryController {
     // store_id:1
     // last_update:2024-01-01 00:00:00.0
 
-    
-
     @DeleteMapping(path = "/delete/{id}")
     public @ResponseBody String deleteInventory(@PathVariable Integer id) {
         inventoryRepository.deleteById(id);
         return "Inventaire Supprimé";
     }
+    @DeleteMapping("/deleteDVD/{id}")
+public @ResponseBody String deleteInventorySimple(@PathVariable Integer id) {
+    List<Integer> InventoryId = inventoryDisponibleRepository.findFreeInventoryIdDVD(id);
+    
+    if (InventoryId == null) {
+        return "Erreur : Aucun DVD disponible pour le film ID " + id;
+    }
+
+    for (Integer inventoryId : InventoryId) {
+        Inventory inventory = inventoryRepository.findById(inventoryId).orElse(null);
+        if (inventory != null) {
+            updateInventory(
+                inventoryId, 
+                inventory.getFilmId(), 
+                inventory.getStoreId(), 
+                inventory.getLastUpdate(), 
+                false
+            );
+        }
+    }
+
+    return "DVD marqué supprimé pour le film ID " + id;
+}
+
+    
     @GetMapping(path = "/getStockByStore")
     public @ResponseBody List<Map<String, Object>> getGroupedInventory() {
         List<Object[]> groupedResults = inventoryRepository.findGroupedInventory();

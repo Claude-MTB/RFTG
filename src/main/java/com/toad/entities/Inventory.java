@@ -20,6 +20,9 @@ public class Inventory {
   @Column(name = "last_update")
   private Timestamp lastUpdate;
 
+  @Column(name = "existe")
+  private Boolean existe;
+
   public Integer getInventoryId() {
     return inventoryId;
   }
@@ -50,5 +53,11 @@ public class Inventory {
 
   public void setLastUpdate(Timestamp lastUpdate) {
     this.lastUpdate = lastUpdate;
+  }
+  public Boolean getExiste(){
+    return existe;
+  }
+  public void setExiste(Boolean existe){
+    this.existe = existe;
   }
 }
