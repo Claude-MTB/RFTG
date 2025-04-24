@@ -244,7 +244,7 @@ CREATE TABLE inventory (
   film_id SMALLINT UNSIGNED NOT NULL,
   store_id TINYINT UNSIGNED NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  existe BOOLEAN default true,
+  existe BOOLEAN NOT NULL default true,
   PRIMARY KEY  (inventory_id),
   KEY idx_fk_film_id (film_id),
   KEY idx_store_id_film_id (store_id,film_id),
